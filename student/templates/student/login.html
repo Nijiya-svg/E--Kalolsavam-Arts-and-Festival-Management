@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Login</title>
+    <style>
+        body{
+            font-family: Arial;
+            background: linear-gradient(120deg,#36b9cc,#f6c23e);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .card{
+            background:white;
+            padding:30px;
+            width:340px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+        h2{text-align:center;margin-bottom:20px;}
+        input{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+            border-radius:6px;
+            border:1px solid #ccc;
+        }
+        button{
+            width:100%;
+            padding:10px;
+            background:#1cc88a;
+            color:white;
+            border:none;
+            border-radius:6px;
+            margin-top:10px;
+            cursor:pointer;
+        }
+        button:hover{background:#17a673;}
+        .link{text-align:center;margin-top:15px;}
+        .error{color:red;text-align:center;margin-top:10px;}
+    </style>
+</head>
+<body>
+
+<div class="card">
+<h2>Student Login</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- IMPORTANT FIX HERE -->
+    <input type="text" name="email" placeholder="Enter Email" required>
+    <input type="password" name="password" placeholder="Enter Password" required>
+
+    <button type="submit">Login</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <p class="error">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<div class="link">
+    New student? <a href="{% url 'signup' %}">Create account</a>
+</div>
+
+</div>
+</body>
+</html>

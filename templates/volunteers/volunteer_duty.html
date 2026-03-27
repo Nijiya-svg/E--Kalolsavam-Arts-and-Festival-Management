@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Volunteer Duty Board | Ekalolsavam{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+    <h4 class="mb-1">Volunteer Duty Board</h4>
+    <p>Track assigned programs and complete responsibilities on time.</p>
+</div>
+
+<div class="row g-4">
+    {% for duty in duties %}
+        <div class="col-md-6">
+            <div class="card board-card card-hover h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                        <h5 class="card-title mb-0">{{ duty.event.name }}</h5>
+                        <span class="app-chip"><i class="bi bi-flag"></i>Assigned</span>
+                    </div>
+                    <p class="event-meta mb-3"><i class="bi bi-calendar-event me-1"></i>{{ duty.event.date }} | {{ duty.event.venue }}</p>
+
+                    <div class="p-3 rounded-3 bg-light border">
+                        <div class="small text-muted mb-1">Duty Description</div>
+                        <p class="mb-0">{{ duty.duty_description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="empty-state">
+                <i class="bi bi-kanban"></i>
+                <h6 class="mb-1">No Duty Assignments Yet</h6>
+                <p class="text-muted mb-0">Your upcoming responsibilities will show up here.</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

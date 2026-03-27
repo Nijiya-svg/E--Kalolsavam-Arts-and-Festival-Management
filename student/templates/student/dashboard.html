@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard | Ekalolsavam{% endblock %}
+
+{% block content %}
+<div class="page-hero mb-4">
+    <h4 class="mb-1">Welcome, {{ request.user.first_name|default:request.user.username }}</h4>
+    <p>Your festival workspace for event registration and progress tracking.</p>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-lg-3">
+        <div class="app-stat">
+            <div class="app-stat-label">Role</div>
+            <div class="app-stat-value">Student</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="app-stat">
+            <div class="app-stat-label">Workspace</div>
+            <div class="app-stat-value">Active</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <a class="text-decoration-none" href="{% url 'events:student-events' %}">
+            <div class="card card-hover h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0 text-dark">Browse Events</h5>
+                        <i class="bi bi-calendar2-week fs-4 text-primary"></i>
+                    </div>
+                    <p class="text-muted mb-0">Explore competitions and register for your preferred events.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="text-decoration-none" href="{% url 'events:student-my' %}">
+            <div class="card card-hover h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0 text-dark">My Participations</h5>
+                        <i class="bi bi-list-check fs-4" style="color: var(--app-secondary);"></i>
+                    </div>
+                    <p class="text-muted mb-0">View registration status, scores, and remarks from judges.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

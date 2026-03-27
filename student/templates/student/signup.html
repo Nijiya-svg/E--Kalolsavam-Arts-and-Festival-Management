@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Signup</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background: linear-gradient(120deg,#4e73df,#1cc88a);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            width:360px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+            position:relative;
+        }
+
+        h2{text-align:center;margin-bottom:20px;}
+
+        input,select{
+            width:100%;
+            padding:11px;
+            margin:8px 0;
+            border-radius:6px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            width:100%;
+            padding:11px;
+            background:#4e73df;
+            color:white;
+            border:none;
+            border-radius:6px;
+            margin-top:12px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        button:hover{background:#2e59d9;}
+
+        .link{text-align:center;margin-top:10px;}
+
+        /* popup message */
+        .popup{
+            position:fixed;
+            top:20px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#1cc88a;
+            color:white;
+            padding:14px 25px;
+            border-radius:8px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+            display:none;
+            animation:slide 0.5s ease;
+            z-index:1000;
+        }
+
+        @keyframes slide{
+            from{top:-60px;opacity:0;}
+            to{top:20px;opacity:1;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- popup -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="popup" id="popup">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<div class="card">
+<h2>Student Registration</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="text" name="school" placeholder="School Name" required>
+
+    <!-- Course manual typing -->
+    <input type="text" name="course" placeholder="Course (eg: +1 Science / BSc Physics)" required>
+
+    <select name="gender" required>
+        <option value="">Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <input type="text" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email" required>
+
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+    <button type="submit">Create Account</button>
+</form>
+
+<div class="link">
+    Already have account? <a href="{% url 'login' %}">Login</a>
+</div>
+
+</div>
+
+<script>
+    const popup = document.getElementById("popup");
+    if(popup){
+        popup.style.display="block";
+        setTimeout(()=>{ popup.style.display="none"; },3000);
+    }
+</script>
+
+</body>
+</html>
